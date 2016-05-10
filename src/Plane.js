@@ -1,7 +1,7 @@
 'use strict'
 
 function Plane() {
-  this._location = ''
+
 }
 
 Plane.prototype.land = function(airport){
