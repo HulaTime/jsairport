@@ -18,4 +18,8 @@ describe('Airport', function(){
     expect(airport.planes()).toContain(plane)
   })
 
+  it('can clear planes for takeoff', function() {
+    airport.clearForTakeOff(plane)
+    expect(airport.planes()).not.toContain(plane)
+  })
 })
