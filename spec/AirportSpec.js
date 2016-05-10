@@ -11,24 +11,44 @@ describe('Airport', function(){
     weather = jasmine.createSpyObj('weather', ['isStormy'])
   })
 
-  it('has no planes by default', function(){
-    expect(airport.planes()).toEqual([])
+  describe('good weather', function() {
+
+    it('has no planes by default', function(){
+      expect(airport.planes()).toEqual([])
+    })
+
+    it('can clear planes for landing', function() {
+      airport.clearForLanding(plane)
+      expect(airport.planes()).toContain(plane)
+    })
+
+    it('can clear planes for takeoff', function() {
+      airport.clearForLanding(plane)
+      airport.clearForTakeOff(plane)
+      expect(airport.planes()).not.toContain(plane)
+    })
+
   })
 
-  it('can clear planes for landing', function() {
-    airport.clearForLanding(plane)
-    expect(airport.planes()).toContain(plane)
+  describe('good weather', function() {
+
+    beforeEach(function() {
+      spyOn(airport, 'isStormy').and.returnValue(true)
+    })
+
+    it('planes can\'t take off in stormy weather', function() {
+      expect(function() { airport.clearForTakeOff(plane) }).toThrowError("Can't Take Off in stormy weather")
+    })
+
+    it('planes can\'t land in stormy weather', function() {
+      expect(function() { airport.clearForLanding(plane) }).toThrowError("Can't Land in stormy weather")
+    })
+
   })
 
-  it('can clear planes for takeoff', function() {
-    weather.isStormy.and.returnValue(false)
-    airport.clearForLanding(plane)
-    airport.clearForTakeOff(plane)
-    expect(airport.planes()).not.toContain(plane)
+  it('can check the weather conditions', function() {
+    expect(airport.isStormy()).toBeFalsy()
   })
-
-
-
 
 
 

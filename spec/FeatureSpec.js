@@ -8,7 +8,7 @@ describe('Feature Test:', function(){
   beforeEach(function(){
     plane = new Plane()
     airport = new Airport()
-    weather = jasmine.createSpyObj('weather', ['isStormy'])
+    weather = new Weather()
   })
 
   it('planes can be instructed to land at an airport', function() {
@@ -23,22 +23,27 @@ describe('Feature Test:', function(){
   })
 
 
-//   As an air traffic controller
-// To ensure safety
-// I want to prevent takeoff when weather is stormy
-
-  // it('planes cannot take off if weather is stormy', function() {
-  //   expect(function() {
-  //     airport.clearForTakeOff(plane, weather)
-  //   }).toThrowError("Plane can't take off in Stormy weather")
-  // })
+  // As an air traffic controller
+  // To ensure safety
+  // I want to prevent takeoff when weather is stormy
 
   it('blocks takeoff when weather is stormy', function(){
     plane.land(airport)
-    weather.isStormy.and.returnValue(true)
-    expect(function(){ plane.takeoff()}).toThrowError('Plane can\'t take off in Stormy weather')
+    spyOn(airport, 'isStormy').and.returnValue(true)
+    expect(function() { airport.clearForTakeOff(plane) }).toThrowError("Can't Take Off in stormy weather")
     expect(airport.planes()).toContain(plane)
   })
+
+  // As an air traffic controller
+  // To ensure safety
+  // I want to prevent landing when weather is stormy
+
+  it('blocks landing when weather is stormy', function() {
+    spyOn(airport, 'isStormy').and.returnValue(true)
+    expect(function() { airport.clearForLanding(plane) }).toThrowError("Can't Land in stormy weather")
+    expect(airport.planes()).not.toContain(plane)
+  })
+
 
 
 })
