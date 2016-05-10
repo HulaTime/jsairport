@@ -16,7 +16,7 @@ describe('Feature Test:', function(){
 
   it('planes can be instructed to take off from an airport', function() {
     plane.land(airport)
-    plane.takeOff(airport)
+    plane.takeOff()
     expect(airport.planes()).not.toContain(plane)
   })
 

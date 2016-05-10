@@ -16,10 +16,10 @@ describe('Plane', function() {
   })
 
   it('can take off from an airport', function() {
-    plane.takeOff(airport)
-    expect(airport.clearForTakeOff).toHaveBeenCalledWith(plane)
+    plane.land(airport)
+    plane.takeOff()
+    expect(airport.clearForTakeOff).toHaveBeenCalled()
   })
-
 
 
 })
