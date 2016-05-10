@@ -1,16 +1,12 @@
-describe('Airport', function() {
+'use strict'
 
-  var plane
+describe('Airport', function(){
   var airport
-
-  beforeEach(function() {
-    plane = new Plane()
-    airport = new Airport
+  beforeEach(function(){
+    airport = new Airport()
   })
 
-  it('airport dock starts empty', function() {
-    expect(airport.dock).toEqual([])
+  it('has no planes by default', function(){
+    expect(airport.planes()).toEqual([])
   })
-
-
 })

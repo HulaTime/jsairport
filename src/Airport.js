@@ -1,10 +1,4 @@
-function Airport() {
+'use strict'
 
-  this.dock = []
-
-}
-
-Airport.prototype.taxi = function(plane) {
-  this.dock.push(plane)
-}
-
+function Airport(){}
+Airport.prototype.planes = function(){ return [] }
