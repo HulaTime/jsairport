@@ -13,6 +13,10 @@ describe('Airport', function(){
 
   describe('good weather', function() {
 
+    beforeEach(function() {
+      spyOn(Math,'random').and.returnValue(0)
+    })
+
     it('has no planes by default', function(){
       expect(airport.planes()).toEqual([])
     })
@@ -30,10 +34,10 @@ describe('Airport', function(){
 
   })
 
-  describe('good weather', function() {
+  describe('bad weather', function() {
 
     beforeEach(function() {
-      spyOn(airport, 'isStormy').and.returnValue(true)
+      spyOn(Math,'random').and.returnValue(0.9)
     })
 
     it('planes can\'t take off in stormy weather', function() {
@@ -45,11 +49,6 @@ describe('Airport', function(){
     })
 
   })
-
-  it('can check the weather conditions', function() {
-    expect(airport.isStormy()).toBeFalsy()
-  })
-
 
 
 })
